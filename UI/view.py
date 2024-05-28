@@ -31,10 +31,10 @@ class View(ft.UserControl):
         #ROW with some controls
         # text field for the name
         self._ddyear = ft.Dropdown(label="Anno",options=[ft.dropdown.Option('2015'),ft.dropdown.Option('2016'),ft.dropdown.Option('2017'),ft.dropdown.Option('2018')])
-        self._ddcolor = ft.Dropdown(label="Colore")
+        self._ddnation = ft.Dropdown(label="Nazione")
         # button for the "creat graph" reply
         self.btn_graph = ft.ElevatedButton(text="Crea Grafo", on_click=self._controller.handle_graph)
-        row1 = ft.Row([self._ddyear,self._ddcolor, self.btn_graph],
+        row1 = ft.Row([self._ddyear,self._ddnation, self.btn_graph],
                       alignment=ft.MainAxisAlignment.CENTER)
         self._page.controls.append(row1)
 

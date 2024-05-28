@@ -11,35 +11,36 @@ class Controller:
         self._listColor = []
 
     def fillDD(self):
-        colori = DAO.getcolor()
-        for i in colori:
-            self._view._ddcolor.options.append(ft.dropdown.Option(i))
+        nazioni = DAO.getNazioni()
+        for i in nazioni:
+            self._view._ddnation.options.append(ft.dropdown.Option(i))
 
 
     def handle_graph(self, e):
-        colore = self._view._ddcolor.value
+        nazione = self._view._ddnation.value
         anno = self._view._ddyear.value
-        if colore is None:
-            self._view.create_alert('Inserire colore')
+        if nazione is None:
+            self._view.create_alert('Inserire nazione')
             return
         if anno is None:
             self._view.create_alert('Inserire anno')
             return
 
-        self._model.creagrafo(colore)
-        self._model.creaconnessioni(int(anno),colore)
+        self._model.creagrafo(nazione)
+        self._model.creaconnessioni(int(anno))
         self._view.txtOut.controls.clear()
 
 
         self._view.txtOut.controls.append(ft.Text(f'Numero di vertici: {self._model.numnodi()} -- Numero di archi: {self._model.numarchi()}'))
-        lista = self._model.tremaggiori()
-        for i in lista:
+        lista = self._model.allpesi()
+        for x,y in lista:
             self._view.txtOut.controls.append(
-                ft.Text(f'Arco da {i[0]} a {i[1]}, peso: {i[2]}'))
+                ft.Text(f'{x} --> {y}'))
+
 
 
         self._view.update_page()
-        self.fillDDProduct()
+        #self.fillDDProduct()
         self._view.btn_search.disabled=False
         self._view.update_page()
 
